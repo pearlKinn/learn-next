@@ -1,4 +1,4 @@
-import { Revenue } from '@/app/lib/definitions';
+import { fetchRevenue } from '@/app/lib/data';
 import { generateYAxis } from '@/app/lib/utils';
 import { lusitana } from '@/app/ui/fonts';
 import { CalendarIcon } from '@heroicons/react/24/outline';
@@ -10,11 +10,9 @@ import { CalendarIcon } from '@heroicons/react/24/outline';
 // https://airbnb.io/visx/
 
 //~ 'revenue'라는 props를 받아, 해당 데이터를 기반으로 막대 차트를 그리는 역할을 합니다.
-export default async function RevenueChart({
-  revenue, //~ 'revenue'라는 props를 인자로 받습니다. 이 props는 Revenue 타입의 배열
-}: {
-  revenue: Revenue[];
-}) {
+export default async function RevenueChart() {
+  const revenue = await fetchRevenue(); // Fetch data inside the component
+
   const chartHeight = 350; //~ 차트의 높이를 정의하는 변수
   // NOTE: comment in this code when you get to this point in the course
   const { yAxisLabels, topLabel } = generateYAxis(revenue); //~ generateYAxis 함수를 이용해 y축 레이블과 최상단 레이블을 생성
